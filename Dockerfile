@@ -12,6 +12,7 @@ FROM scratch
 
 # Copy the binary from the builder stage
 COPY --from=builder /app/go-tutorial .
+COPY ./views ./views
 
 # Command to run the application
 CMD ["/go-tutorial"]

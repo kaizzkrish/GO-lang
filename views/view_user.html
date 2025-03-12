@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+</head>
+<body>
+    <h1>Users</h1>
+    <ul>
+        {{range .Users}}
+        <li>{{.Username}} - {{.Email}} - {{.FirstName}} - {{.LastName}} - {{.PhoneNumber}} - {{.Age}}</li>
+        {{end}}
+    </ul>
+
+    <h2>Add New User</h2>
+    <form method="POST" action="/users">
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="email" name="email" placeholder="Email" required><br>
+        <input type="text" name="firstname" placeholder="First Name" required><br>
+        <input type="text" name="lastname" placeholder="Last Name" required><br>
+        <input type="text" name="phonenumber" placeholder="Phone Number" required><br>
+        <input type="number" name="age" placeholder="Age" required><br>
+        <button type="submit">Add User</button>
+    </form>
+</body>
+</html>
