@@ -1,5 +1,9 @@
 package main //
-import "fmt"
+import (
+	"fmt"
+	"sync"
+	"time"
+)
 
 func main() {
 	fmt.Println("Hello, World!")
@@ -21,9 +25,12 @@ func main() {
 		fmt.Println("Not a half-century!")
 	}
 
-	for i := 0; i < 8; i++ { //For is the only loop in Go. i has a scope only within the loop. i cannot be declared with var.
-		fmt.Println(i)
+	var wg sync.WaitGroup    //WaitGroup is used to wait for a collection of goroutines to finish.
+	for i := 0; i < 5; i++ { //For is the only loop in Go. i has a scope only within the loop. i cannot be declared with var.
+		wg.Add(1)
+		go printNumbers(i, &wg) // go keyword is used to create a new goroutine. // &wg is the address of the variable wg.
 	}
+	wg.Wait() // Wait blocks until the WaitGroup counter is zero.
 	// fmt.Println(i) will throw an error as i is not defined outside the loop.
 	fmt.Println(add(5, 6))
 
@@ -44,4 +51,10 @@ func main() {
 }
 func add(a int, b int) int {
 	return a + b
+}
+
+func printNumbers(n int, wg *sync.WaitGroup) { // *sync.WaitGroup is a pointer to the WaitGroup variable.
+	defer wg.Done()
+	time.Sleep(1 * time.Second)
+	fmt.Println(n)
 }
