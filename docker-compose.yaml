@@ -1,0 +1,7 @@
+version: '3.8' # Specify the Compose file format version
+
+services:
+  myapp: # Name of the service
+    build: . # Use the current directory to build the image
+    image: go-lang-practice:latest # Tag the built image
+    container_name: my-go-lang-practice # Name the container

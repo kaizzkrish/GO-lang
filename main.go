@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-tutorial/basics"
+	"go-lang-practice/basics"
 )
 
 func main() {
