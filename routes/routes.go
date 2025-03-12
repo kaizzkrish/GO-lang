@@ -9,9 +9,12 @@ import (
 
 // SetupRoutes sets up all the routes for the application
 func SetupRoutes(app *fiber.App) {
-	// User routes
+
 	fmt.Println("Routes")
-	app.Get("/", controllers.GetHome)       // Display users
-	app.Get("/users", controllers.GetUsers) // Display users
-	// app.Post("/users", controllers.AddUser)   // Add a new user
+	app.Get("/", controllers.GetHome)
+	app.Get("/users", controllers.GetUsers)
+	app.Get("/api/users", controllers.GetUsersJSON)
+
+	// ✅ Allow POST requests to add a user
+	app.Post("/users", controllers.AddUser)
 }

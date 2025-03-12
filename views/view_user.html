@@ -1,27 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User List</title>
-</head>
-<body>
-    <h1>Users</h1>
-    <ul>
-        {{range .Users}}
-        <li>{{.Username}} - {{.Email}} - {{.FirstName}} - {{.LastName}} - {{.PhoneNumber}} - {{.Age}}</li>
-        {{end}}
-    </ul>
+{{ define "content" }}
 
-    <h2>Add New User</h2>
-    <form method="POST" action="/users">
-        <input type="text" name="username" placeholder="Username" required><br>
-        <input type="email" name="email" placeholder="Email" required><br>
-        <input type="text" name="firstname" placeholder="First Name" required><br>
-        <input type="text" name="lastname" placeholder="Last Name" required><br>
-        <input type="text" name="phonenumber" placeholder="Phone Number" required><br>
-        <input type="number" name="age" placeholder="Age" required><br>
-        <button type="submit">Add User</button>
-    </form>
-</body>
-</html>
+
+    <!-- Two Column Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Left Column: User Table -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4">Users</h2>
+            <table class="min-w-full table-auto border-collapse border border-gray-300">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-700">
+                        <th class="border border-gray-300 px-4 py-2">Username</th>
+                        <th class="border border-gray-300 px-4 py-2">Email</th>
+                        <th class="border border-gray-300 px-4 py-2">First Name</th>
+                        <th class="border border-gray-300 px-4 py-2">Last Name</th>
+                        <th class="border border-gray-300 px-4 py-2">Phone Number</th>
+                        <th class="border border-gray-300 px-4 py-2">Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Users}}
+                    <tr class="text-center">
+                        <td class="border border-gray-300 px-4 py-2">{{.Username}}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{.Email}}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{.FirstName}}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{.LastName}}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{.PhoneNumber}}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{.Age}}</td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td colspan="6" class="text-center text-gray-500 py-4">No users found.</td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Right Column: Add New User Form -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4">Add New User</h2>
+            <form method="POST" action="/users" class="space-y-4">
+                <div class="flex flex-col">
+                    <label for="username" class="font-semibold mb-2">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Username" required class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="email" class="font-semibold mb-2">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email" required class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="firstname" class="font-semibold mb-2">First Name</label>
+                    <input type="text" id="firstname" name="firstname" placeholder="First Name" required class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="lastname" class="font-semibold mb-2">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" placeholder="Last Name" required class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="phonenumber" class="font-semibold mb-2">Phone Number</label>
+                    <input type="text" id="phonenumber" name="phonenumber" placeholder="Phone Number" required class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="age" class="font-semibold mb-2">Age</label>
+                    <input type="number" id="age" name="age" placeholder="Age" required class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">Add User</button>
+            </form>
+        </div>
+    </div>
+{{ end }}
