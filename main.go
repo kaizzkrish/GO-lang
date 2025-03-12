@@ -55,6 +55,6 @@ func add(a int, b int) int {
 
 func printNumbers(n int, wg *sync.WaitGroup) { // *sync.WaitGroup is a pointer to the WaitGroup variable.
 	defer wg.Done()
-	time.Sleep(1 * time.Second)
+	time.Sleep(1 * time.Second) // Fun fact: time.Sleep(time.Duration(n) * time.Second) is called sleep sort.
 	fmt.Println(n)
 }
