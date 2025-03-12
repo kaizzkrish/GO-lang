@@ -27,6 +27,15 @@ func main() {
 	// fmt.Println(i) will throw an error as i is not defined outside the loop.
 	fmt.Println(add(5, 6))
 
+	type Person struct { //Structs are used to define custom data types.
+		Name      string
+		Age       string
+		MarriedAt int
+	}
+
+	p := Person{"John Doe", "25", 25}
+	fmt.Printf("Name: %s\nAge: %s\nMArried at: %d\n", p.Name, p.Age, p.MarriedAt)
+
 	count := 0
 	for count < 5 {
 		fmt.Println("count", count)
