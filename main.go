@@ -20,4 +20,13 @@ func main() {
 	} else { // else should be added in the same line as the closing brace
 		fmt.Println("Not a half-century!")
 	}
+
+	for i := 0; i < 8; i++ { //For is the only loop in Go. i has a scope only within the loop. i cannot be declared with var.
+		fmt.Println(i)
+	}
+	// fmt.Println(i) will throw an error as i is not defined outside the loop.
+	fmt.Println(add(5, 6))
+}
+func add(a int, b int) int {
+	return a + b
 }
