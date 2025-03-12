@@ -5,3 +5,13 @@ services:
     build: . # Use the current directory to build the image
     image: go-lang-practice:latest # Tag the built image
     container_name: my-go-lang-practice # Name the container
+        # Docker Compose is a tool for defining and running multi-container Docker applications.
+    # With Compose, you use a YAML file to configure your application's services.
+    # Then, with a single command, you create and start all the services from your configuration.
+
+    # To run this docker-compose file, use the following command:
+    # docker-compose up
+
+    # This command will build the Docker image (if it doesn't already exist) and start the container.
+    # You can stop the container with:
+    # docker-compose down
