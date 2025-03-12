@@ -5,6 +5,18 @@ services:
     build: . # Use the current directory to build the image
     image: go-lang-practice:latest # Tag the built image
     container_name: my-go-lang-practice # Name the container
+    depends_on:
+      db:
+        condition: service_healthy 
+    ports:
+      - "8080:8080" # Expose the app on port 8080
+    environment:
+      # Set the DATABASE_URL environment variable to connect to PostgreSQL
+      DATABASE_URL: postgres://postgres_user:postgres_pass@db:5432/postgres_db_name?sslmode=disable
+    networks:
+      - go-postgres-network
+    volumes:
+      - .:/app
   db: # PostgreSQL database service
     image: postgres:13 # Use the official PostgreSQL image
     container_name: postgres-db # Name the database container
