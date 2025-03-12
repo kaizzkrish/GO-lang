@@ -5,13 +5,30 @@ services:
     build: . # Use the current directory to build the image
     image: go-lang-practice:latest # Tag the built image
     container_name: my-go-lang-practice # Name the container
-        # Docker Compose is a tool for defining and running multi-container Docker applications.
-    # With Compose, you use a YAML file to configure your application's services.
-    # Then, with a single command, you create and start all the services from your configuration.
+  db: # PostgreSQL database service
+    image: postgres:13 # Use the official PostgreSQL image
+    container_name: postgres-db # Name the database container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root@123
+      POSTGRES_DB: go_lang
+    ports:
+      - "5432:5432" # Expose PostgreSQL on port 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - go-postgres-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d go_lang"] # Check if PostgreSQL is ready
+      interval: 10s # Run the check every 10 seconds
+      timeout: 5s # Wait 5 seconds for the test to succeed
+      retries: 5 # Consider the container healthy after 5 retries
 
-    # To run this docker-compose file, use the following command:
-    # docker-compose up
+# Define volumes for PostgreSQL persistence
+volumes:
+  postgres_data:
 
-    # This command will build the Docker image (if it doesn't already exist) and start the container.
-    # You can stop the container with:
-    # docker-compose down
+# Define the network for communication between services
+networks:
+  go-postgres-network:
+    driver: bridge
