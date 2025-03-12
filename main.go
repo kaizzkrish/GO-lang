@@ -26,6 +26,12 @@ func main() {
 	}
 	// fmt.Println(i) will throw an error as i is not defined outside the loop.
 	fmt.Println(add(5, 6))
+
+	count := 0
+	for count < 5 {
+		fmt.Println("count", count)
+		count++
+	}
 }
 func add(a int, b int) int {
 	return a + b
